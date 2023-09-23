@@ -1,6 +1,6 @@
 /**
  Data.java defines the Date object and implements Date constructors, along with
- methods to compare dates, change dates, and check the validit of a date.
+ methods to compare dates, change dates, and check the validity of a date.
  @author Khushi Ranpura
  */
 
