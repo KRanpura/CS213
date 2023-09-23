@@ -53,4 +53,4 @@ public class Event implements Comparable<Event>
 //        • The toString() method returns a textual representation of an event in the following format.
 //        [p1.Event p1.Date: 10/21/2023] [Start: 2:00pm] [End: 3:00pm] @HLL114 (Hill Center, Busch) [Contact: Computer Science, cs@rutgers.edu]
 //        • The equals() method returns true if two dates, timeslots and locations are equal.
-//        • The compareTo() method compares the dates first, then the timeslots if the dates are the same.
+//        • The compareTo() method compares the dates first, then the timeslots if the dates are the same .
