@@ -18,7 +18,7 @@ public enum Department
      Constructor for the Department enum class that initializes the
      departmentName field of each enum constant to the String value
      passed into the method.
-     @param departmentName value to initialize departmentName field as
+     @param departmentName hosting department
      */
     private Department (String departmentName)
     {

@@ -1,0 +1,48 @@
+/**
+ Timeslot.java defines an enum class called Timeslot, which represents
+ different event booking times to the hour and minute along with methods
+ and constructors to change or access those times.
+ @author Khushi Ranpura
+ */
+package p1;
+public enum Timeslot
+{
+    MORNING(10, 30), //10:30 am
+    AFTERNOON(14, 0), //2:00 pm
+    EVENING(18,30); //6:30 pm
+
+    private int hour;
+    private int minute;
+
+    /**
+     Constructor for the Timeslot enum class that initializes the
+     hour and minute of each timeslot to the passed in parameters.
+     @param hour exact hour of timeslot
+     @param minute exact minute of timeslot
+     */
+    private Timeslot(int hour, int minute)
+    {
+        this.hour = hour;
+        this.minute = minute;
+    }
+
+    /**
+     Getter method that returns the hour of the
+     Timeslot constant it is called on.
+     @return hour
+     */
+    public int getHour()
+    {
+        return hour;
+    }
+
+    /**
+     Getter method that returns the minute of the
+     Timeslot constant it is called on.
+     @return minute
+     */
+    public int getMinute()
+    {
+        return minute;
+    }
+}
