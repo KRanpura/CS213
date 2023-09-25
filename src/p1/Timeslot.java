@@ -16,7 +16,7 @@ public enum Timeslot
 
     /**
      Constructor for the Timeslot enum class that initializes the
-     hour and minute of each timeslot to the passed in parameters..
+     hour and minute of each timeslot to the passed in parameters. .
      @param hour exact hour of timeslot
      @param minute exact minute of timeslot
      */
