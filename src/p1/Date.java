@@ -68,7 +68,8 @@ public class Date implements Comparable<Date> {
 
     /**
      Date constructor that creates a new Date object
-     when there are no parameters.
+     initialized to current date and time if there are
+     no parameters.
      */
     public Date()
     {
