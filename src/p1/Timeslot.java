@@ -8,11 +8,13 @@ package p1;
 public enum Timeslot
 {
     MORNING(10, 30), //10:30 am
-    AFTERNOON(14, 0), //2:00 pm
+    AFTERNOON(14, 00), //2:00 pm
     EVENING(18,30); //6:30 pm
 
     private int hour;
     private int minute;
+
+    private static final int NOON = 12;
 
     /**
      Constructor for the Timeslot enum class that initializes the
@@ -33,7 +35,7 @@ public enum Timeslot
      */
     public int getHour()
     {
-        return hour;
+        return this.hour;
     }
 
     /**
@@ -43,6 +45,18 @@ public enum Timeslot
      */
     public int getMinute()
     {
-        return minute;
+        return this.minute;
     }
+    public String getTimeSlotString()
+    {
+        if (this.hour > NOON)
+        {
+            return ((this.hour - NOON) + ":" + this.minute + "pm");
+        }
+        else
+        {
+            return (this.hour + ":" + this.minute + "am");
+        }
+    }
+
 }
