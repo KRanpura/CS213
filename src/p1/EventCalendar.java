@@ -18,10 +18,21 @@ public class EventCalendar
     }
     private void grow() //increase capacity of list by 4 whenever full
     {
+        Event[] newArray = new Event[events.length+4];
+        for (int i=0; i<events.length;i++)
+        {
+            newArray[i] = events[i];
 
+        }
+        events = newArray;
     }
     public boolean add(Event event)
     {
+        if (events.length == 0)
+        {
+            grow();
+        }
+
         return false; //placeholder
     }
     public boolean remove(Event event)

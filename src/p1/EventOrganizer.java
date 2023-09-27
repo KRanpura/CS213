@@ -13,4 +13,13 @@ public class EventOrganizer
 //    command lines from the console until a “Q” command is entered. You will lose 5 points if the run()
 //    method is missing. You MUST keep this method under 40 lines for readability, or you will lose 3 points.
 //    You can define necessary instance variables and private helper methods for handling the commands.
+    public void run()
+    {
+        System.out.println("Even Organizer running....");
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNextLine())
+        {
+
+        }
+    }
 }
