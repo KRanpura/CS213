@@ -11,7 +11,7 @@ public class Contact
     private String email;
 
     /**
-     Date constructor that creates a new Date object when parameters are passed in.
+     Contact constructor that creates a new Contact object when parameters are passed in.
      @param department the department the contact represents
      @param email the contact's email
      */
@@ -19,6 +19,26 @@ public class Contact
     {
         this.department = department;
         this.email = email;
+    }
+
+    /**
+     Getter method that returns the Department attribute of the
+     Contact object it is called on.
+     * @return department
+     */
+    public Department getDepartment()
+    {
+        return this.department;
+    }
+
+    /**
+     Getter method that returns the email attribute of the Contact
+     object it is called on.
+     @return email
+     */
+    public String getEmail()
+    {
+        return this.email;
     }
 
     /**
