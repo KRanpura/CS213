@@ -33,6 +33,19 @@ public class Event implements Comparable<Event>
     }
 
     /**
+     Overloaded Event constructor that creates a new Event object when parameters are passed in.
+     @param date date of the event booking
+     @param startTime start time of the event booking
+     @param location location of event
+     */
+    public Event(Date date, Timeslot startTime, Location location)
+    {
+        this.date = date;
+        this.startTime = startTime;
+        this.location = location;
+    }
+
+    /**
      Getter method that returns the date attribute of the
      Event object it is called on.
      * @return date
