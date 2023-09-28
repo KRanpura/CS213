@@ -52,7 +52,7 @@ public enum Timeslot
         return this.minute;
     }
 
-    public Timeslot checkTimeSlot(String timeslot)
+    public Timeslot getTimeSlot(String timeslot)
     {
         for (Timeslot slot : Timeslot.values())
         {
