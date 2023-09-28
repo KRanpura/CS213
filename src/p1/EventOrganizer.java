@@ -17,9 +17,32 @@ public class EventOrganizer
     {
         System.out.println("Even Organizer running....");
         Scanner scanner = new Scanner(System.in);
+        //need to create new event and call Event Calendar with date, starttime, location, contact duration
+
         while(scanner.hasNextLine())
         {
+            if(scanner.length() >= 1)
+            {
+                char command = scanner.charAt(0);
+                String eventString = scanner.substring(1).trim();
 
+
+                switch(command)
+                {
+                    case 'A':
+                        String [] eventParts = eventString.split(" ");
+                        if (eventParts.length ==5 )
+                        {
+                            String dateStr = eventParts[0];
+                            int month =Integer.parseInt(dateStr.split("/")[0]);
+                            int day = Integer.parseInt(dateStr.split("/")[1]);
+                            int year = Integer.parseInt(dateStr.split("/")[2]);
+                            Date eventDate = new Date(month, day, year);
+
+                        }
+                }
+
+            }
         }
     }
 }
