@@ -1,5 +1,6 @@
 package p1;
-
+import java.util.Scanner;
+import java.util.StringTokenizer;
 public class EventOrganizer
 {
 //(c) EventOrganizer class
@@ -17,14 +18,18 @@ public class EventOrganizer
     {
         System.out.println("Event Organizer running....");
         Scanner scanner = new Scanner(System.in);
+        EventCalendar calendar = new EventCalendar(); // Instantiate an EventCalendar
+
         //need to create new event and call Event Calendar with date, starttime, location, contact duration
         // A 2/29/2024 afternoon HLL114 CS cs@rutgers.edu 60
         while(scanner.hasNextLine())
         {
-            if(scanner.length() >= 1)
+            String line = scanner.nextLine().trim(); // Read the entire line
+
+            if(line.length() >= 1)
             {
-                char command = scanner.charAt(0);
-                String eventString = scanner.substring(1).trim();
+                char command = line.charAt(0);
+                String eventString = line.substring(1).trim();
 
 
                 switch(command)
@@ -40,17 +45,25 @@ public class EventOrganizer
                             Date eventDate = new Date(month, day, year);
 
                             String timeslotStr = eventParts[1].toUpperCase();
+                            Timeslot timeslot = Timeslot.valueOf(timeslotStr);
 
                             String locationString = eventParts[2].toUpperCase();
+                            Location location = Location.valueOf(locationString);
 
                             String departmentString = eventParts[3].toUpperCase();
+                            Department department = Department.valueOf(departmentString);
 
                             String contactString = eventParts[4];
+                            String[] contactSplit = contactString.split("@");
+                            Department depc = Department.valueOf(contactSplit[0].toUpperCase());
+                            Contact contact = new Contact(depc, contactString);
+
 
                             String durationString = eventParts[5];
                             int duration = Integer.parseInt(durationString);
 
-                            //Event newEvent = new Event();
+                            Event newEvent = new Event(eventDate, timeslot, location, contact, duration);
+                            calendar.add(newEvent);
 
 
                         }
