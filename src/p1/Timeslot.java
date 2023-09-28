@@ -5,16 +5,11 @@
  @author Khushi Ranpura
  */
 package p1;
-
-import javax.lang.model.type.NullType;
-
 public enum Timeslot
 {
     MORNING(10, 30), //10:30 am
     AFTERNOON(14, 00), //2:00 pm
-    EVENING(18,30), //6:30 pm
-    NULL(0,0); //return this if none of the above constants
-
+    EVENING(18,30); //6:30 pm
     private int hour;
     private int minute;
 
@@ -50,18 +45,6 @@ public enum Timeslot
     public int getMinute()
     {
         return this.minute;
-    }
-
-    public Timeslot getTimeSlot(String timeslot)
-    {
-        for (Timeslot slot : Timeslot.values())
-        {
-            if (slot.toString().equals(timeslot))
-            {
-                return slot;
-            }
-        }
-        return NULL;
     }
 
     public String getTimeSlotString()

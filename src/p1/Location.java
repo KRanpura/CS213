@@ -52,18 +52,6 @@ public enum Location
         return campusName;
     }
 
-    public Location getLocation(String location)
-    {
-        for(Location place : Location.values())
-        {
-            if (place.toString().equals(location))
-            {
-                return place;
-            }
-        }
-        return null;
-    }
-
 }
 
 
