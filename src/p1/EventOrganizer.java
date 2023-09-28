@@ -67,7 +67,26 @@ public class EventOrganizer
 
 
                         }
+                        //R 12/22/2023 MORNING HLL114
                     case 'R':
+                        String [] eventPartsR = eventString.split(" ");
+                        if (eventPartsR.length == 3)
+                        {
+                            String dateStr = eventPartsR[0];
+                            int month =Integer.parseInt(dateStr.split("/")[0]);
+                            int day = Integer.parseInt(dateStr.split("/")[1]);
+                            int year = Integer.parseInt(dateStr.split("/")[2]);
+                            Date eventDate = new Date(month, day, year);
+
+                            String timeslotStr = eventPartsR[1].toUpperCase();
+                            Timeslot timeslot = Timeslot.valueOf(timeslotStr);
+
+                            String locationString = eventPartsR[2].toUpperCase();
+                            Location location = Location.valueOf(locationString);
+
+                            Event newEvent = new Event(eventDate, timeslot, location);
+                            calendar.add(newEvent);
+                        }
 
                 }
 
