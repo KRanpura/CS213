@@ -15,10 +15,10 @@ public class EventOrganizer
 //    You can define necessary instance variables and private helper methods for handling the commands.
     public void run()
     {
-        System.out.println("Even Organizer running....");
+        System.out.println("Event Organizer running....");
         Scanner scanner = new Scanner(System.in);
         //need to create new event and call Event Calendar with date, starttime, location, contact duration
-
+        // A 2/29/2024 afternoon HLL114 CS cs@rutgers.edu 60
         while(scanner.hasNextLine())
         {
             if(scanner.length() >= 1)
@@ -31,7 +31,7 @@ public class EventOrganizer
                 {
                     case 'A':
                         String [] eventParts = eventString.split(" ");
-                        if (eventParts.length ==5 )
+                        if (eventParts.length == 6 )
                         {
                             String dateStr = eventParts[0];
                             int month =Integer.parseInt(dateStr.split("/")[0]);
@@ -39,7 +39,23 @@ public class EventOrganizer
                             int year = Integer.parseInt(dateStr.split("/")[2]);
                             Date eventDate = new Date(month, day, year);
 
+                            String timeslotStr = eventParts[1].toUpperCase();
+
+                            String locationString = eventParts[2].toUpperCase();
+
+                            String departmentString = eventParts[3].toUpperCase();
+
+                            String contactString = eventParts[4];
+
+                            String durationString = eventParts[5];
+                            int duration = Integer.parseInt(durationString);
+
+                            //Event newEvent = new Event();
+
+
                         }
+                    case 'R':
+
                 }
 
             }
