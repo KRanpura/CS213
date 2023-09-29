@@ -28,13 +28,13 @@ public class EventOrganizer
 
             if(line.length() >= 1)
             {
-                char command = line.charAt(0);
-                String eventString = line.substring(1).trim();
-
+                String[] commandAndArgs = line.split(" ", 2); // Split the line into command and arguments
+                String command = commandAndArgs[0].toUpperCase();
+                String eventString = (commandAndArgs.length > 1) ? commandAndArgs[1] : "";
 
                 switch(command)
                 {
-                    case 'A':
+                    case "A":
                         String [] eventParts = eventString.split(" ");
                         if (eventParts.length == 6 )
                         {
@@ -68,7 +68,7 @@ public class EventOrganizer
 
                         }
                         //R 12/22/2023 MORNING HLL114
-                    case 'R':
+                    case "R":
                         String [] eventPartsR = eventString.split(" ");
                         if (eventPartsR.length == 3)
                         {
@@ -87,11 +87,21 @@ public class EventOrganizer
                             Event newEvent = new Event(eventDate, timeslot, location);
                             calendar.add(newEvent);
                         }
-                    case 'P':
+                    case "P":
                         calendar.print();
 
-                    case 'PE':
+                    case "PE":
                         calendar.printByDate();
+
+                    case "PC":
+                        calendar.printByCampus();
+
+                    case "PD":
+                        calendar.printByDepartment();
+
+                    case "Q":
+                        System.out.println("Event Organizer Terminated");
+                        break;
                 }
 
             }
