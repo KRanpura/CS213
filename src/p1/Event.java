@@ -48,6 +48,19 @@ public class Event implements Comparable<Event>
     }
 
     /**
+     Overloaded default Event constructor that creates a new Event object with all
+     parameters set to null, or 0, as default values.
+     */
+    public Event()
+    {
+        this.date = null;
+        this.startTime = null;
+        this.location  = null;
+        this.contact = null;
+        this.duration = 0;
+    }
+
+    /**
      Getter method that returns the date attribute of the
      Event object it is called on.
      * @return date
@@ -135,6 +148,21 @@ public class Event implements Comparable<Event>
         this.duration = duration;
     }
 
+    /**
+     * Method that takes in an event as a parameter and returns
+     * a cloned copy of the event.
+     * @return newEvent, new event created as a copy of event
+     */
+    public Event clone()
+    {
+        Event newEvent = new Event();
+        newEvent.setDate(this.getDate());
+        newEvent.setStartTime(this.getStartTime());
+        newEvent.setLocation(this.getLocation());
+        newEvent.setContact(this.getContact());
+        newEvent.setDuration(this.getDuration());
+        return newEvent;
+    }
 
     /**
      Checks if two events are equal, meaning they are on the same date, at the
