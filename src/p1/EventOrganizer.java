@@ -87,7 +87,11 @@ public class EventOrganizer
                             Event newEvent = new Event(eventDate, timeslot, location);
                             calendar.add(newEvent);
                         }
+                    case 'P':
+                        calendar.print();
 
+                    case 'PE':
+                        calendar.printByDate();
                 }
 
             }
