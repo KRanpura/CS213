@@ -34,5 +34,17 @@ public enum Department
     {
         return departmentName;
     }
+
+    public Department getDepartment(String deptString)
+    {
+        for (Department dep : Department.values())
+        {
+            if (dep.toString().equals(deptString))
+            {
+                return dep;
+            }
+        }
+        return null;
+    }
 }
 

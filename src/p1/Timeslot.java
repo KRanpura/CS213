@@ -71,16 +71,16 @@ public enum Timeslot
         }
     }
 
-    public boolean validTimeslot(String timeslotString)
+    public Timeslot getTimeSlot(String timeslotString)
     {
         for (Timeslot slot : Timeslot.values())
         {
             if (slot.toString().equals(timeslotString))
             {
-                return true;
+                return slot;
             }
         }
-        return false;
+        return null;
     }
 
 
