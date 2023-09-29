@@ -178,6 +178,12 @@ public class Date implements Comparable<Date> {
         }
     }
 
+    @Override
+    public String toString()
+    {
+        return (this.month + "/" + this.day + "/" + this.year);
+    }
+
     public static void main(String[] args)
     {
         testFebDays_NonLeap();
