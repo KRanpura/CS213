@@ -67,9 +67,8 @@ public class Date implements Comparable<Date> {
     public void setYear(int year) {this.year = year;}
 
     /**
-     Date constructor that creates a new Date object
-     initialized to current date and time if there are
-     no parameters.
+     Default Date constructor that creates a new Date object
+     initialized to current date and time.
      */
     public Date()
     {
@@ -78,7 +77,6 @@ public class Date implements Comparable<Date> {
         this.year = calendar.get(Calendar.YEAR);
         this.month = calendar.get(Calendar.MONTH) + 1;
         this.day = calendar.get(Calendar.DAY_OF_MONTH);
-
     }
 
     /**
@@ -95,9 +93,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     Checks validity of a date object, making sure the month and day
-     are positive numbers that exist within the normal range, and that the
-     number of days makes sense for the particular month and year.
+     Checks validity of a date object.
      @return true if the date is valid, false otherwise.
      */
     public boolean isValid()
@@ -150,14 +146,12 @@ public class Date implements Comparable<Date> {
             long otherDateTimeInMillis = other.getTimeInMillis();
             long daysDifference = (otherDateTimeInMillis - thisDateTimeInMillis) /
                     (HOURS_IN_A_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISEC_PER_MIN);
-
             return ((int) daysDifference);
         }
         else
         {
             return 0;
         }
-
     }
 
     /**
@@ -183,30 +177,70 @@ public class Date implements Comparable<Date> {
             return false;
         }
     }
-}
 
-//have to implement a testbed main
-//    //testbed main needed
-//    public static void main(String[] args)
-//    {
-//        testFebDays_NonLeap();
-//        testFebDays_Leap();
-//        testMonth_OutOfRange();
-//    }
-//
-//    private static void testFebDays_NonLeap()
-//    {
-//
-//    }
-//    private static void testFebDays_Leap()
-//    {
-//
-//    }
-//    private static void testMonth_OutOfRange()
-//    {
-//       // Date date = new Date("2/29/2011");
-//        boolean expectedOutput = false;
-//        boolean actualOutput = date.isValid();
-//
-//    }
-//}
+    public static void main(String[] args)
+    {
+        testFebDays_NonLeap();
+        testFebDays_Leap();
+        testMonth_OutOfRange();
+        testMonthsWith31Days();
+        testMonthsWith30Days();
+        testDay_OutOfRange();
+    }
+
+    private static void testFebDays_NonLeap()
+    {
+        Date date = new Date(2, 29, 2011);
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #1: # of days in Feb. in a non-leap year is 28");
+        testResult(date, expectedOutput, actualOutput);
+    }
+    private static void testFebDays_Leap()
+    {
+        Date date = new Date(2,29,2012);
+        boolean expectedOutput = true;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #2: # of days in Feb. in a leap year is 29");
+        testResult(date, expectedOutput, actualOutput);
+    }
+    private static void testMonth_OutOfRange()
+    {
+        Date date = new Date(17, 2, 2018);
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #3: Month number should be >= 1 and <= 12");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    private static void testMonthsWith31Days()
+    {
+        Date date = new Date(3, 32, 2023);
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #4: # of days in March is 31");
+        testResult(date, expectedOutput, actualOutput);
+    }
+    private static void testMonthsWith30Days()
+    {
+        Date date = new Date(11, 31, 2023);
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #5: # of days in November is 30");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    private static void testDay_OutOfRange()
+    {
+        Date date = new Date(11, 0, 2023);
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #6: # of days must be between 1 and 30 maximum");
+        testResult(date, expectedOutput, actualOutput);
+    }
+    private static void testResult(Date date, boolean expectedVal, boolean actualVal)
+    {
+        System.out.println("Test data: " + date.month + "/" + date.day + "/" + date.year +
+                ", expected output: " + expectedVal + ", actual output: " + actualVal + "\n");
+    }
+}
