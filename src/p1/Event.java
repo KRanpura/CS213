@@ -14,6 +14,8 @@ public class Event implements Comparable<Event>
     private int duration; //in minutes
 
     private static final int MIN_PER_HOUR = 60;
+    private static final int EQUAL = 0;
+    private static final int NOT_EQUAL = -1;
 
     /**
      Event constructor that creates a new Event object when parameters are passed in.
@@ -171,19 +173,19 @@ public class Event implements Comparable<Event>
     @Override
     public int compareTo(Event otherEvent)
     {
-        if (this.getDate().compareTo(otherEvent.getDate()) != 0)
+        if (this.getDate().compareTo(otherEvent.getDate()) != EQUAL)
         {
-            return -1;
+            return NOT_EQUAL;
         }
         else
         {
-            if (this.getStartTime() == otherEvent.getStartTime())
+            if (this.getStartTime().equals(otherEvent.getStartTime()))
             {
-                return 0;
+                return EQUAL;
             }
             else
             {
-                return -1;
+                return NOT_EQUAL;
             }
         }
     }
@@ -196,11 +198,12 @@ public class Event implements Comparable<Event>
     @Override
     public String toString()
     {
-        return "[Event Date:" + this.getDate().getMonth() + "/" + this.getDate().getDay() + "/" +
+        return "[Event Date: " + this.getDate().getMonth() + "/" + this.getDate().getDay() + "/" +
                 this.getDate().getYear() + "] [Start: " + this.getStartTime().getTimeSlotString() + "] [End: " +
                 this.getEndTimeString() + " ] @" + this.getLocation() + " (" +
                 this.getLocation().getBuildingName() + ", " + this.getLocation().getCampusName() +
-                ") [Contact: " + this.getContact().getDepartment() + ", " + this.getContact().getEmail() + "]";
+                ") [Contact: " + this.getContact().getDepartment().getDepartmentName() + ", " +
+                this.getContact().getEmail() + "]";
     }
 
     /**
@@ -218,12 +221,171 @@ public class Event implements Comparable<Event>
 
         if (newHours > 12)
         {
-            return (newHours - 12) + ":" + newMinutes + "pm";
+            if (newMinutes < 10)
+            {
+                return (newHours - 12) + ":0" + newMinutes + "pm";
+            }
+            else
+            {
+                return (newHours - 12) + ":" + newMinutes + "pm";
+            }
         }
         else
         {
-            return (newHours + ":" + newMinutes + "am");
+            if (newMinutes < 10)
+            {
+                return newHours + ":0" + newMinutes + "pm";
+            }
+            else
+            {
+                return newHours + ":" + newMinutes + "pm";
+            }
         }
+    }
+
+    /**
+     * Testbed main to check compareTo(), equals(), and toString() methods.
+     */
+    public static void main(String[]args)
+    {
+        System.out.println();
+        test1_compareToMethod();
+        test2_compareToMethod();
+        test3_compareToMethod();
+        test1_equalsMethod();
+        test2_equalsMethod();
+        test_toStringMethod();
+    }
+
+    /**
+     Private tester method that checks if compareTo() method returns correct
+     output for events with same date and different start time.
+     */
+    private static void test1_compareToMethod()
+    {
+        Date date = new Date(10, 21, 2023);
+        Contact contact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event event = new Event(date, Timeslot.MORNING, Location.HLL114, contact, 60);
+
+        Date otherDate = new Date(10, 21, 2023);
+        Contact otherContact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event otherEvent = new Event(otherDate, Timeslot.EVENING, Location.HLL114, contact, 60);
+
+        int expectedOutput = NOT_EQUAL;
+        int actualOutput = event.compareTo(otherEvent);
+        System.out.println("**Test case #1: testing compareTo() method in Event class " +
+                "on events with same date and different startTimes");
+        System.out.println("Event 1: " + event.toString());
+        System.out.println("Event 2: " + otherEvent.toString());
+        System.out.println("Expected output: " + expectedOutput + ", Actual output: " + actualOutput + "\n");
+    }
+
+    /**
+     Private tester method that checks if compareTo() method returns correct
+     output for events with different date and different start time.
+     */
+    private static void test2_compareToMethod()
+    {
+        Date date = new Date(10, 21, 2023);
+        Contact contact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event event = new Event(date, Timeslot.MORNING, Location.HLL114, contact, 60);
+
+        Date otherDate = new Date(10, 23, 2023);
+        Event otherEvent = new Event(otherDate, Timeslot.AFTERNOON, Location.HLL114, contact, 60);
+
+        int expectedOutput = NOT_EQUAL;
+        int actualOutput = event.compareTo(otherEvent);
+        System.out.println("**Test case #2: testing compareTo() method in Event class " +
+                "on events with different date and different startTime");
+        System.out.println("Event 1: " + event.toString());
+        System.out.println("Event 2: " + otherEvent.toString());
+        System.out.println("Expected output: " + expectedOutput + ", Actual output: " + actualOutput + "\n");
+    }
+
+    /**
+     Private tester method that checks if compareTo() method returns correct
+     output for events with same date and same start time.
+     */
+    private static void test3_compareToMethod()
+    {
+        Date date = new Date(10, 21, 2023);
+        Contact contact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event event = new Event(date, Timeslot.MORNING, Location.HLL114, contact, 60);
+
+        Date otherDate = new Date(10, 21, 2023);
+        Contact otherContact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event otherEvent = new Event(otherDate, Timeslot.MORNING, Location.HLL114, contact, 60);
+
+        int expectedOutput = EQUAL;
+        int actualOutput = event.compareTo(otherEvent);
+        System.out.println("**Test case #3: testing compareTo() method in Event class " +
+                "on events with same date and same startTime");
+        System.out.println("Event 1: " + event.toString());
+        System.out.println("Event 2: " + otherEvent.toString());
+        System.out.println("Expected output: " + expectedOutput + ", Actual output: " + actualOutput + "\n");
+    }
+
+    /**
+     Private tester method that checks if compareTo() method returns correct
+     output for events with same date, same start time, and different location.
+     */
+    private static void test1_equalsMethod()
+    {
+        Date date = new Date(10, 21, 2023);
+        Contact contact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event event = new Event(date, Timeslot.MORNING, Location.HLL114, contact, 60);
+
+        Date otherDate = new Date(10, 21, 2023);
+        Contact otherContact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event otherEvent = new Event(otherDate, Timeslot.MORNING, Location.ARC103, contact, 60);
+
+        boolean expectedOutput = false;
+        boolean actualOutput = event.equals(otherEvent);
+        System.out.println("**Test case #4: testing equals() method in Event class " +
+                "on events with same date, same startTime, and different location");
+        System.out.println("Event 1: " + event.toString());
+        System.out.println("Event 2: " + otherEvent.toString());
+        System.out.println("Expected output: " + expectedOutput + ", Actual output: " + actualOutput + "\n");
+    }
+
+
+    /**
+     Private tester method that checks if compareTo() method returns correct
+     output for events with same date, same start time, and different location.
+     */
+    private static void test2_equalsMethod()
+    {
+        Date date = new Date(10, 21, 2023);
+        Contact contact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event event = new Event(date, Timeslot.MORNING, Location.HLL114, contact, 60);
+
+        Date otherDate = new Date(10, 21, 2023);
+        Contact otherContact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event otherEvent = new Event(otherDate, Timeslot.MORNING, Location.HLL114, contact, 60);
+
+        boolean expectedOutput = true;
+        boolean actualOutput = event.equals(otherEvent);
+        System.out.println("**Test case #4: testing equals() method in Event class " +
+                "on events with same date, same startTime, and same location");
+        System.out.println("Event 1: " + event.toString());
+        System.out.println("Event 2: " + otherEvent.toString());
+        System.out.println("Expected output: " + expectedOutput + ", Actual output: " + actualOutput + "\n");
+    }
+
+    /**
+     Private tester method that checks if the toString() method returns correct
+     output.
+     */
+    private static void test_toStringMethod()
+    {
+        Date date = new Date(10, 21, 2023);
+        Contact contact = new Contact(Department.CS, "cs@rutgers.edu");
+        Event event = new Event(date, Timeslot.AFTERNOON, Location.HLL114, contact, 60);
+        System.out.println("**Test case #6: testing toString() method in Event class");
+        System.out.println("Expected Output: [Event Date: 10/21/2023] [Start: 2:00pm] [End: 3:00pm] " +
+                "@HLL114 (Hill Center, Busch) [Contact: Computer Science, cs@rutgers.edu]");
+
+        System.out.println("Actual Output: " + event.toString());
     }
 }
 
