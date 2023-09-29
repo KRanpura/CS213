@@ -47,16 +47,42 @@ public enum Timeslot
         return this.minute;
     }
 
+    /**
+     * String method that returns a Timeslot formatted as a string.
+     * @return String timeslot
+     */
     public String getTimeSlotString()
     {
-        if (this.hour > NOON)
+        if (this.equals(Timeslot.MORNING))
         {
-            return ((this.hour - NOON) + ":" + this.minute + "pm");
+            return ("10:30am");
+        }
+        else if (this.equals(Timeslot.AFTERNOON))
+        {
+            return ("2:00pm");
+        }
+        else if (this.equals(Timeslot.EVENING))
+        {
+            return ("6:30pm");
         }
         else
         {
-            return (this.hour + ":" + this.minute + "am");
+            return null;
         }
     }
+
+    public boolean validTimeslot(String timeslotString)
+    {
+        for (Timeslot slot : Timeslot.values())
+        {
+            if (slot.toString().equals(timeslotString))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
 }
