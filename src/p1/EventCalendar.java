@@ -140,7 +140,7 @@ public class EventCalendar
     {
         for (int i = 0; i < this.events.length; i++)
         {
-            this.events[i].toString();
+            System.out.println(this.events[i].toString());
         }
     }
     public void printByDate() //ordered by date and timeslot
