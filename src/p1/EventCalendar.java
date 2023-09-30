@@ -150,34 +150,33 @@ public class EventCalendar
     public void printByDate() //ordered by date and timeslot
     {
         //implement in place sorting and then run print() - bubblesort(shorter)
+        // Create an array to hold non-null events
+        Event[] nonNullEvents = new Event[numEvents];
+        int nonNullCount = 0;
 
-        Event[] sortedEvents = new Event[numEvents];
-
-        // Copy the non-null events to the new array
-        int sortedIndex = 0;
-        for (int i = 0; i < numEvents; i++) {
+        // Copy non-null events to the new array
+        for (int i = 0; i < events.length; i++) {
             if (events[i] != null) {
-                sortedEvents[sortedIndex++] = events[i];
+                nonNullEvents[nonNullCount++] = events[i];
             }
         }
 
-        // Bubble sort the array by date and timeslot
-        for (int i = 0; i < sortedIndex - 1; i++) {
-            for (int j = 0; j < sortedIndex - i - 1; j++) {
-                if (sortedEvents[j].compareTo(sortedEvents[j + 1]) > 0) {
+        // Bubble sort the non-null events by date and timeslot
+        for (int i = 0; i < nonNullCount - 1; i++) {
+            for (int j = 0; j < nonNullCount - i - 1; j++) {
+                if (nonNullEvents[j].compareTo(nonNullEvents[j + 1]) < 0) {
                     // Swap events if they are out of order
-                    Event temp = sortedEvents[j];
-                    sortedEvents[j] = sortedEvents[j + 1];
-                    sortedEvents[j + 1] = temp;
+                    Event temp = nonNullEvents[j];
+                    nonNullEvents[j] = nonNullEvents[j + 1];
+                    nonNullEvents[j + 1] = temp;
                 }
             }
         }
 
-        // Print the sorted events
-        for (int i = 0; i < sortedIndex; i++) {
-            System.out.println(sortedEvents[i].toString());
+        // Print the sorted non-null events
+        for (int i = 0; i < nonNullCount; i++) {
+            System.out.println(nonNullEvents[i].toString());
         }
-
 
     }
     public void printByCampus() //ordered by campus and building/room

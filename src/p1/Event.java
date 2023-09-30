@@ -201,21 +201,13 @@ public class Event implements Comparable<Event>
     @Override
     public int compareTo(Event otherEvent)
     {
-        if (this.getDate().compareTo(otherEvent.getDate()) != EQUAL)
-        {
-            return NOT_EQUAL;
+        int dateComparison = this.getDate().compareTo(otherEvent.getDate());
+
+        if (dateComparison != EQUAL) {
+            return dateComparison;
         }
-        else
-        {
-            if (this.getStartTime().equals(otherEvent.getStartTime()))
-            {
-                return EQUAL;
-            }
-            else
-            {
-                return NOT_EQUAL;
-            }
-        }
+
+        return this.getStartTime().compareTo(otherEvent.getStartTime());
     }
 
     /**

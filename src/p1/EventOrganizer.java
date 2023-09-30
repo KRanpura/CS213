@@ -82,7 +82,7 @@ public class EventOrganizer
             if(!line.isEmpty())
             {
                 String[] commandAndArgs = line.split(" ", 2); // Split the line into command and arguments
-                String command = commandAndArgs[0].toUpperCase();
+                String command = commandAndArgs[0];
                 String eventString = (commandAndArgs.length > 1) ? commandAndArgs[1] : "";
                 switch(command)
                 {
