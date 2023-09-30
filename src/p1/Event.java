@@ -226,10 +226,6 @@ public class Event implements Comparable<Event>
     @Override
     public String toString()
     {
-        if (this == null)
-        {
-            return "";
-        }
         return "[Event Date: " + this.getDate().getMonth() + "/" + this.getDate().getDay() + "/" +
                 this.getDate().getYear() + "] [Start: " + this.getStartTime().getTimeSlotString() + "] [End: " +
                 this.getEndTimeString() + " ] @" + this.getLocation() + " (" +
