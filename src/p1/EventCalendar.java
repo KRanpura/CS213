@@ -67,21 +67,20 @@ public class EventCalendar
      */
     public boolean add(Event event)
     {
-        if (this.events.length == 0) //array has initial capacity 0
-        {
-            grow();
-        }
-        for (int i = 0; i < this.events.length; i++)
-        {
-            if (this.events[i] == null)
+        if (!contains(event)) {
+            if (this.events.length == 0) //array has initial capacity 0
             {
-                this.events[i] = event;
-                this.numEvents++;
-                if (i == this.events.length - 1)
-                {
-                    grow();
+                grow();
+            }
+            for (int i = 0; i < this.events.length; i++) {
+                if (this.events[i] == null) {
+                    this.events[i] = event;
+                    this.numEvents++;
+                    if (i == this.events.length - 1) {
+                        grow();
+                    }
+                    return true;
                 }
-                return true;
             }
         }
         return false;
@@ -103,17 +102,16 @@ public class EventCalendar
         }
         else
         {
-            this.events[index] = null; //remove event
+            this.events[index] = null; // Remove event
             this.numEvents--;
-            for (int i = index; i < this.events.length; i++) //shift each event up 1 position
-            {
-                if (this.events[index+1] != null)
-                {
-                    Event temp = this.events[index+1].clone();
-                    this.events[index] = temp;
-                }
+
+            // Shift events to fill the gap
+            for (int i = index; i < this.events.length - 1; i++) {
+                this.events[i] = this.events[i + 1];
             }
-            this.events[this.events.length-1] = null; //set last spot to null
+            // Set the last spot to null
+            this.events[this.events.length - 1] = null;
+
             return true;
         }
     }
@@ -151,7 +149,34 @@ public class EventCalendar
     }
     public void printByDate() //ordered by date and timeslot
     {
-        //implement in place sorting and then run print()
+        //implement in place sorting and then run print() - bubblesort(shorter)
+
+        Event[] sortedEvents = new Event[numEvents];
+
+        // Copy the non-null events to the new array
+        int sortedIndex = 0;
+        for (int i = 0; i < numEvents; i++) {
+            if (events[i] != null) {
+                sortedEvents[sortedIndex++] = events[i];
+            }
+        }
+
+        // Bubble sort the array by date and timeslot
+        for (int i = 0; i < sortedIndex - 1; i++) {
+            for (int j = 0; j < sortedIndex - i - 1; j++) {
+                if (sortedEvents[j].compareTo(sortedEvents[j + 1]) > 0) {
+                    // Swap events if they are out of order
+                    Event temp = sortedEvents[j];
+                    sortedEvents[j] = sortedEvents[j + 1];
+                    sortedEvents[j + 1] = temp;
+                }
+            }
+        }
+
+        // Print the sorted events
+        for (int i = 0; i < sortedIndex; i++) {
+            System.out.println(sortedEvents[i].toString());
+        }
 
 
     }
