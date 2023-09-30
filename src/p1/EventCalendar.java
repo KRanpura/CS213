@@ -20,6 +20,7 @@ public class EventCalendar
     public EventCalendar()
     {
         this.numEvents = 0;
+        this.events = new Event[0];
     }
 
     /**
@@ -140,12 +141,15 @@ public class EventCalendar
     {
         for (int i = 0; i < this.events.length; i++)
         {
-            System.out.println(this.events[i].toString());
+            if (this.events[i] != null) {
+                System.out.println(this.events[i].toString());
+            }
         }
     }
     public void printByDate() //ordered by date and timeslot
     {
         //implement in place sorting and then run print()
+
 
     }
     public void printByCampus() //ordered by campus and building/room

@@ -45,7 +45,11 @@ public class EventOrganizer
                             Date eventDate = new Date(month, day, year);
 
                             String timeslotStr = eventParts[1].toUpperCase();
-                            Timeslot timeslot = Timeslot.valueOf(timeslotStr);
+
+                                Timeslot timeslot = Timeslot.valueOf(timeslotStr);
+
+
+
 
                             String locationString = eventParts[2].toUpperCase();
                             Location location = Location.valueOf(locationString);
@@ -65,7 +69,7 @@ public class EventOrganizer
                             Event newEvent = new Event(eventDate, timeslot, location, contact, duration);
                             calendar.add(newEvent);
 
-
+                            break;
                         }
                         //R 12/22/2023 MORNING HLL114
                     case "R":
@@ -86,19 +90,23 @@ public class EventOrganizer
 
                             Event newEvent = new Event(eventDate, timeslot, location);
                             calendar.add(newEvent);
+                            break;
                         }
                     case "P":
                         calendar.print();
+                        break;
 
                     case "PE":
                         calendar.printByDate();
+                        break;
 
                     case "PC":
                         calendar.printByCampus();
+                        break;
 
                     case "PD":
                         calendar.printByDepartment();
-
+                        break;
                     case "Q":
                         System.out.println("Event Organizer Terminated");
                         break;
