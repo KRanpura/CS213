@@ -89,7 +89,7 @@ public class EventOrganizer
                             Location location = Location.valueOf(locationString);
 
                             Event newEvent = new Event(eventDate, timeslot, location);
-                            calendar.add(newEvent);
+                            calendar.remove(newEvent);
                             break;
                         }
                     case "P":

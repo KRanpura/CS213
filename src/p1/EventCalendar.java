@@ -33,9 +33,12 @@ public class EventCalendar
     {
         for (int i = 0; i < this.events.length; i++)
         {
-            if (this.events[i].equals(event))
+            if (this.events[i] != null)
             {
-                return i;
+                if (this.events[i].equals(event))
+                {
+                    return i;
+                }
             }
         }
         return NOT_FOUND;
