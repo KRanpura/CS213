@@ -210,6 +210,8 @@ public class Event implements Comparable<Event>
         return this.getStartTime().compareTo(otherEvent.getStartTime());
     }
 
+
+
     /**
      Prints an event, including the date, start and end time, location,
      department, contact, etc.

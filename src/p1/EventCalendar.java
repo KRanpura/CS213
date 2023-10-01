@@ -181,10 +181,82 @@ public class EventCalendar
     }
     public void printByCampus() //ordered by campus and building/room
     {
-        //implement in place sorting and then run print()
+        //implement in place sorting and then run print() - bubblesort(shorter)
+        // Create an array to hold non-null events
+        Event[] nonNullEvents = new Event[numEvents];
+        int nonNullCount = 0;
+
+        // Copy non-null events to the new array
+        for (int i = 0; i < events.length; i++) {
+            if (events[i] != null) {
+                nonNullEvents[nonNullCount++] = events[i];
+            }
+        }
+
+        // Bubble sort the non-null events by campus and building
+        // Bubble sort the non-null events by campus and building/room
+        for (int i = 0; i < nonNullCount - 1; i++) {
+            for (int j = 0; j < nonNullCount - i - 1; j++) {
+                String campus1 = nonNullEvents[j].getLocation().getCampusName().toLowerCase();
+                String campus2 = nonNullEvents[j + 1].getLocation().getCampusName().toLowerCase();
+
+                // If campuses are the same, compare by building/room
+                if (campus1.equals(campus2)) {
+                    String building1 = nonNullEvents[j].getLocation().getBuildingName().toLowerCase();
+                    String building2 = nonNullEvents[j + 1].getLocation().getBuildingName().toLowerCase();
+
+                    if (building1.compareTo(building2) > 0) {
+                        // Swap events if they are out of order by building/room
+                        Event temp = nonNullEvents[j];
+                        nonNullEvents[j] = nonNullEvents[j + 1];
+                        nonNullEvents[j + 1] = temp;
+                    }
+                } else if (campus1.compareTo(campus2) > 0) {
+                    // Swap events if they are out of order by campus
+                    Event temp = nonNullEvents[j];
+                    nonNullEvents[j] = nonNullEvents[j + 1];
+                    nonNullEvents[j + 1] = temp;
+                }
+            }
+        }
+
+        // Print the sorted non-null events
+        for (int i = 0; i < nonNullCount; i++) {
+            System.out.println(nonNullEvents[i].toString());
+        }
+
     }
     public void printByDepartment() //ordered by department
     {
         //implement in place sorting and then run print()
+        // Create an array to hold non-null events
+        Event[] nonNullEvents = new Event[numEvents];
+        int nonNullCount = 0;
+
+        // Copy non-null events to the new array
+        for (Event event : events) {
+            if (event != null) {
+                nonNullEvents[nonNullCount++] = event;
+            }
+        }
+
+        // Bubble sort the non-null events by department
+        for (int i = 0; i < nonNullCount - 1; i++) {
+            for (int j = 0; j < nonNullCount - i - 1; j++) {
+                String department1 = nonNullEvents[j].getContact().getDepartment().getDepartmentName().toLowerCase();
+                String department2 = nonNullEvents[j + 1].getContact().getDepartment().getDepartmentName().toLowerCase();
+
+                if (department1.compareTo(department2) > 0) {
+                    // Swap events if they are out of order by department
+                    Event temp = nonNullEvents[j];
+                    nonNullEvents[j] = nonNullEvents[j + 1];
+                    nonNullEvents[j + 1] = temp;
+                }
+            }
+        }
+        // Print the sorted non-null events
+        for (int i = 0; i < nonNullCount; i++) {
+            System.out.println(nonNullEvents[i].toString());
+        }
     }
 }

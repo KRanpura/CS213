@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 public class EventOrganizer
 {
+    //PRINT STATEMENTS ONLY IN THIS CLASS
 //(c) EventOrganizer class
 //• This class is the user interface class to process the command lines. An instance of this class can process a
 //        single command line or multiple command lines at a time. If it cannot process multiple command lines at
@@ -16,11 +17,13 @@ public class EventOrganizer
 //    You can define necessary instance variables and private helper methods for handling the commands.
 
     private void addHelper(String [] eventParts, EventCalendar calendar) {
+            boolean makeEvent = true;
             String dateStr = eventParts[0];
             int month = Integer.parseInt(dateStr.split("/")[0]);
             int day = Integer.parseInt(dateStr.split("/")[1]);
             int year = Integer.parseInt(dateStr.split("/")[2]);
             Date eventDate = new Date(month, day, year);
+
 
             Timeslot timeslot = Timeslot.valueOf(eventParts[1].toUpperCase());
 
@@ -87,12 +90,12 @@ public class EventOrganizer
                 switch(command)
                 {
                     case "A":
-                        String [] eventParts = eventString.split(" ");
+                        String [] eventParts = eventString.split("\\s+");
                         addHelper(eventParts, calendar);
                         break;
                         //R 12/22/2023 MORNING HLL114
                     case "R":
-                        String [] eventPartsR = eventString.split(" ");
+                        String [] eventPartsR = eventString.split("\\s+");
                         removeHelper(eventPartsR, calendar);
                             break;
                     case "P":
