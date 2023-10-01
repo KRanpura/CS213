@@ -71,18 +71,6 @@ public enum Timeslot
         }
     }
 
-    public Timeslot getTimeSlot(String timeslotString)
-    {
-        for (Timeslot slot : Timeslot.values())
-        {
-            if (slot.toString().equals(timeslotString))
-            {
-                return slot;
-            }
-        }
-        return null;
-    }
-
 
 
 }

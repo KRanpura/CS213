@@ -140,15 +140,27 @@ public class EventCalendar
      */
     public void print() //print the array as is
     {
+        if (this.events.length == 0)
+        {
+            System.out.println("Event calendar is empty!");
+            return;
+        }
+        System.out.println("\n* Event calendar *");
         for (int i = 0; i < this.events.length; i++)
         {
             if (this.events[i] != null) {
                 System.out.println(this.events[i].toString());
             }
         }
+        System.out.println("* end of event calendar *");
     }
     public void printByDate() //ordered by date and timeslot
     {
+        if (this.events.length == 0)
+        {
+            System.out.println("Event calendar is empty!");
+            return;
+        }
         //implement in place sorting and then run print() - bubblesort(shorter)
         // Create an array to hold non-null events
         Event[] nonNullEvents = new Event[numEvents];
@@ -173,14 +185,21 @@ public class EventCalendar
             }
         }
 
+        System.out.println("\n* Event calendar *");
         // Print the sorted non-null events
         for (int i = 0; i < nonNullCount; i++) {
             System.out.println(nonNullEvents[i].toString());
         }
+        System.out.println("* end of event calendar *");
 
     }
     public void printByCampus() //ordered by campus and building/room
     {
+        if (this.events.length == 0)
+        {
+            System.out.println("Event calendar is empty!");
+            return;
+        }
         //implement in place sorting and then run print() - bubblesort(shorter)
         // Create an array to hold non-null events
         Event[] nonNullEvents = new Event[numEvents];
@@ -220,14 +239,21 @@ public class EventCalendar
             }
         }
 
+        System.out.println("\n* Event calendar *");
         // Print the sorted non-null events
-        for (int i = 0; i < nonNullCount; i++) {
+        for (int i = 0; i < nonNullCount; i++)
+        {
             System.out.println(nonNullEvents[i].toString());
         }
-
+        System.out.println("* end of event calendar *");
     }
     public void printByDepartment() //ordered by department
     {
+        if (this.events.length == 0)
+        {
+            System.out.println("Event calendar is empty!");
+            return;
+        }
         //implement in place sorting and then run print()
         // Create an array to hold non-null events
         Event[] nonNullEvents = new Event[numEvents];
@@ -254,9 +280,11 @@ public class EventCalendar
                 }
             }
         }
+        System.out.println("\n* Event calendar *");
         // Print the sorted non-null events
         for (int i = 0; i < nonNullCount; i++) {
             System.out.println(nonNullEvents[i].toString());
         }
+        System.out.println("* end of event calendar *");
     }
 }
