@@ -172,7 +172,7 @@ public class EventOrganizer
         }
         else if (eventDate.compareTo(today) > 0)
         {
-            System.out.println(eventDate.toString() + " " + eventDate.compareTo(today) + " : Event date must be a future date!");
+            System.out.println(eventDate.toString() + " : Event date must be a future date!");
             return false;
         }
         else if (Math.abs(eventDate.compareTo(today)) > SIX_MONTHS_IN_DAYS)

@@ -185,7 +185,7 @@ public class EventCalendar
             }
         }
 
-        System.out.println("\n* Event calendar *");
+        System.out.println("\n* Event calendar by event date and start time *");
         // Print the sorted non-null events
         for (int i = 0; i < nonNullCount; i++) {
             System.out.println(nonNullEvents[i].toString());
@@ -239,7 +239,7 @@ public class EventCalendar
             }
         }
 
-        System.out.println("\n* Event calendar *");
+        System.out.println("\n* Event calendar by campus and building *");
         // Print the sorted non-null events
         for (int i = 0; i < nonNullCount; i++)
         {
@@ -280,7 +280,7 @@ public class EventCalendar
                 }
             }
         }
-        System.out.println("\n* Event calendar *");
+        System.out.println("\n* Event calendar by department *");
         // Print the sorted non-null events
         for (int i = 0; i < nonNullCount; i++) {
             System.out.println(nonNullEvents[i].toString());
