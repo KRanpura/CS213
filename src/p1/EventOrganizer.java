@@ -30,7 +30,7 @@ public class EventOrganizer
             Timeslot timeslot = getTimeSlot(eventParts[1].toUpperCase());
             if (timeslot == null)
             {
-                System.out.println("Invalid timeslot!");
+                System.out.println("Invalid time slot!");
                 return;
             }
             Location location = getLocation(eventParts[2].toUpperCase());
@@ -120,12 +120,12 @@ public class EventOrganizer
     public void run()
     {
         System.out.println("Event Organizer running....");
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         EventCalendar calendar = new EventCalendar(); // Instantiate an EventCalendar
         boolean isRunning = true;
-        while(scanner.hasNextLine() && isRunning)
+        while(new Scanner(System.in).hasNextLine() && isRunning)
         {
-            String line = scanner.nextLine().trim(); // Read the entire line
+            String line = new Scanner(System.in).nextLine().trim(); // Read the entire line
             if(!line.isEmpty())
             {
                 String[] commandAndArgs = line.split(" ", 2); // Split the line into command and arguments
@@ -134,12 +134,12 @@ public class EventOrganizer
                 switch(command)
                 {
                     case "A":
-                        String [] eventParts = eventString.split("\\s+");
-                        addHelper(eventParts, calendar);
+                        //String [] eventParts = eventString.split("\\s+");
+                        addHelper(eventString.split("\\s+"), calendar);
                         break;
                     case "R":
-                        String [] removeEventParts = eventString.split("\\s+");
-                        removeHelper(removeEventParts, calendar);
+                        //String [] removeEventParts = eventString.split("\\s+");
+                        removeHelper(eventString.split("\\s+"), calendar);
                         break;
                     case "P":
                         calendar.print();
