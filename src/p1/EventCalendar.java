@@ -154,6 +154,11 @@ public class EventCalendar
         }
         System.out.println("* end of event calendar *");
     }
+
+    /**
+     * Private method to print each event in the array
+     * in order of date.
+     */
     public void printByDate() //ordered by date and timeslot
     {
         if (this.events.length == 0)
@@ -193,6 +198,11 @@ public class EventCalendar
         System.out.println("* end of event calendar *");
 
     }
+
+    /**
+     * Private method to print each event in the array
+     * grouped by campus.
+     */
     public void printByCampus() //ordered by campus and building/room
     {
         if (this.events.length == 0)
@@ -247,6 +257,11 @@ public class EventCalendar
         }
         System.out.println("* end of event calendar *");
     }
+
+    /**
+     * Private method to print each event in the array
+     * grouped by department.
+     */
     public void printByDepartment() //ordered by department
     {
         if (this.events.length == 0)

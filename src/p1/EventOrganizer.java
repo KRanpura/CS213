@@ -1,58 +1,58 @@
+/**
+ * EventOrganizer.java creates a new instance of the Event Organizer
+ * class. It defines methods to parse user input for event information
+ * in addition to making and removing events.
+ * @author Kusum Gandham, Khushi Ranpura
+ */
 package p1;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 public class EventOrganizer
 {
     private static final int SIX_MONTHS_IN_DAYS = 182;
+
+    /**
+        Private helper method to parse user input for event information,
+        check if information is valid, and then add the event.
+        @param eventParts array of String inputs to parse
+        @param calendar calendar to add new event to 
+     */
     private void addHelper(String [] eventParts, EventCalendar calendar)
     {
-           // boolean makeEvent = true;
             String dateStr = eventParts[0];
             int month = Integer.parseInt(dateStr.split("/")[0]);
             int day = Integer.parseInt(dateStr.split("/")[1]);
             int year = Integer.parseInt(dateStr.split("/")[2]);
             Date eventDate = new Date(month, day, year);
-
             if (!validEventDate(eventDate))
             {
                 return;
             }
-
             Timeslot timeslot = getTimeSlot(eventParts[1].toUpperCase());
             if (timeslot == null)
             {
                 System.out.println("Invalid timeslot!");
                 return;
             }
-            //Timeslot timeslot = Timeslot.valueOf(eventParts[1].toUpperCase());
-
             Location location = getLocation(eventParts[2].toUpperCase());
             if (location == null)
             {
                 System.out.println("Invalid location!");
                 return;
             }
-            //Location location = Location.valueOf(eventParts[2].toUpperCase());
-            //Department department = Department.valueOf(eventParts[3].toUpperCase());
-
             String contactString = eventParts[4];
             String[] contactSplit = contactString.split("@");
-
-            Department depc = getDepartment(contactSplit[0].toUpperCase());
-           // Department depc = Department.valueOf(contactSplit[0].toUpperCase());
-
-            if (depc == null)
+            Department dept = getDepartment(contactSplit[0].toUpperCase());
+            if (dept == null)
             {
                 System.out.println("Invalid contact information!");
                 return;
             }
-            Contact contact = new Contact(depc, contactString);
+            Contact contact = new Contact(dept, contactString);
             if (!contact.isValid())
             {
                 System.out.println("Invalid contact information!");
                 return;
             }
-
             int duration = Integer.parseInt(eventParts[5]); //fix this to catch NumberFormatException
             if (duration < 30 || duration > 120)
             {
@@ -60,8 +60,7 @@ public class EventOrganizer
                 return;
             }
             Event newEvent = new Event(eventDate, timeslot, location, contact, duration);
-            boolean result = calendar.add(newEvent);
-            if (result)
+            if (calendar.add(newEvent))
             {
                 System.out.println("Event added to calender.");
             }
@@ -71,9 +70,15 @@ public class EventOrganizer
             }
     }
 
-    private void removeHelper(String [] eventPartsR, EventCalendar calendar)
+    /**
+     Private helper method to parse user input for event information,
+     check if event is valid and exists, and then remove the event.
+     @param removeEventParts array of String inputs to parse for event info
+     @param calendar calendar to add remove event from
+     */
+    private void removeHelper(String [] removeEventParts, EventCalendar calendar)
     {
-        String dateStr = eventPartsR[0];
+        String dateStr = removeEventParts[0];
         int month =Integer.parseInt(dateStr.split("/")[0]);
         int day = Integer.parseInt(dateStr.split("/")[1]);
         int year = Integer.parseInt(dateStr.split("/")[2]);
@@ -82,17 +87,14 @@ public class EventOrganizer
         {
             return;
         }
-
-        String timeslotStr = eventPartsR[1].toUpperCase();
+        String timeslotStr = removeEventParts[1].toUpperCase();
         Timeslot timeslot = getTimeSlot(timeslotStr);
         if (timeslot == null)
         {
             System.out.println("Invalid timeslot!");
             return;
         }
-        //Timeslot timeslot = Timeslot.valueOf(timeslotStr);
-
-        String locationString = eventPartsR[2].toUpperCase();
+        String locationString = removeEventParts[2].toUpperCase();
         Location location = Location.valueOf(locationString);
         if (location == null)
         {
@@ -110,17 +112,20 @@ public class EventOrganizer
             System.out.println("Cannot remove; event is not in the calendar!");
         }
     }
+
+    /**
+     Main method to parse user input for event information and
+     to call helpers to validate, add, remove, and print events.
+     */
     public void run()
     {
         System.out.println("Event Organizer running....");
         Scanner scanner = new Scanner(System.in);
         EventCalendar calendar = new EventCalendar(); // Instantiate an EventCalendar
         boolean isRunning = true;
-        // A 2/29/2024 afternoon HLL114 CS cs@rutgers.edu 60
         while(scanner.hasNextLine() && isRunning)
         {
             String line = scanner.nextLine().trim(); // Read the entire line
-
             if(!line.isEmpty())
             {
                 String[] commandAndArgs = line.split(" ", 2); // Split the line into command and arguments
@@ -132,11 +137,10 @@ public class EventOrganizer
                         String [] eventParts = eventString.split("\\s+");
                         addHelper(eventParts, calendar);
                         break;
-                        //R 12/22/2023 MORNING HLL114
                     case "R":
-                        String [] eventPartsR = eventString.split("\\s+");
-                        removeHelper(eventPartsR, calendar);
-                            break;
+                        String [] removeEventParts = eventString.split("\\s+");
+                        removeHelper(removeEventParts, calendar);
+                        break;
                     case "P":
                         calendar.print();
                         break;
@@ -157,11 +161,17 @@ public class EventOrganizer
                         System.out.println(command + " is an invalid command!");
                         break;
                 }
-
             }
         }
     }
 
+    /**
+     * Private helper method to make sure an event date is a
+     * valid date, is a future date, and is not more than 6 months
+     * in the future.
+     * @param eventDate date to be validated
+     * @return true is valid event date, else false
+     */
     private boolean validEventDate(Date eventDate)
     {
         Date today = new Date();
@@ -186,6 +196,12 @@ public class EventOrganizer
         }
     }
 
+    /**
+     Private helper method to get the timeslot enum constant that is represented
+     by the passed in string.
+     @param timeslotString string to find a timeslot enum constant for
+     @return timeslot if string is a valid enum constant, else null
+     */
     private Timeslot getTimeSlot(String timeslotString)
     {
         for (Timeslot slot : Timeslot.values())
@@ -198,6 +214,13 @@ public class EventOrganizer
         return null;
     }
 
+    /**
+     Private helper method to get the location enum constant
+     that is represented by the passed in string.
+     @param locationString string to find a location enum constant for
+     @return location enum constant, or null if string does not represent
+     valid location
+     */
     private Location getLocation(String locationString)
     {
         for (Location location : Location.values())
@@ -210,6 +233,13 @@ public class EventOrganizer
         return null;
     }
 
+    /**
+     Private helper method to get the department enum constant
+     that is represented by the passed in string.
+     @param deptString string to find a department enum constant for
+     @return department enum constant, or null if string does not represent
+     valid department
+     */
     private Department getDepartment(String deptString)
     {
         for (Department dep : Department.values())

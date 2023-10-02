@@ -2,7 +2,7 @@
  Event.java defines the Event object with its attributes: date, startTime, location,
  contact, and duration of event. It additionally implements methods to access these
  attributes, print out an event, and compare events to each other.
- @author Kusum Gandham, Khushi Ranpura
+ @author Khushi Ranpura, Kusum Gandham
  */
 package p1;
 public class Event implements Comparable<Event>

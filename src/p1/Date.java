@@ -3,7 +3,6 @@
  methods to compare dates, change dates, and check the validity of a date.
  @author Khushi Ranpura
  */
-
 package p1;
 import java.util.Calendar;
 public class Date implements Comparable<Date> {
@@ -178,12 +177,20 @@ public class Date implements Comparable<Date> {
         }
     }
 
+    /**
+     * public toString method to return a Date's month, date, year
+     * attributes formatted as a date.
+     * @return a string containing formatted date
+     */
     @Override
     public String toString()
     {
         return (this.month + "/" + this.day + "/" + this.year);
     }
 
+    /**
+     * Main method to test the isValid() and isLeapYear() methods
+     */
     public static void main(String[] args)
     {
         testFebDays_NonLeap();
@@ -194,6 +201,10 @@ public class Date implements Comparable<Date> {
         testDay_OutOfRange();
     }
 
+    /**
+    Private tester method to test isValid() method output
+     for invalid date.
+     */
     private static void testFebDays_NonLeap()
     {
         Date date = new Date(2, 29, 2011);
@@ -202,6 +213,11 @@ public class Date implements Comparable<Date> {
         System.out.println("**Test case #1: # of days in Feb. in a non-leap year is 28");
         testResult(date, expectedOutput, actualOutput);
     }
+
+    /**
+     Private tester method to test isValid() method output
+     for valid date.
+     */
     private static void testFebDays_Leap()
     {
         Date date = new Date(2,29,2012);
@@ -210,6 +226,11 @@ public class Date implements Comparable<Date> {
         System.out.println("**Test case #2: # of days in Feb. in a leap year is 29");
         testResult(date, expectedOutput, actualOutput);
     }
+
+    /**
+     Private tester method to test isValid() method output
+     for an invalid date with month out of range.
+     */
     private static void testMonth_OutOfRange()
     {
         Date date = new Date(17, 2, 2018);
@@ -219,6 +240,10 @@ public class Date implements Comparable<Date> {
         testResult(date, expectedOutput, actualOutput);
     }
 
+    /**
+     Private tester method to test isValid() method output
+     for invalid date with number of days out of range.
+     */
     private static void testMonthsWith31Days()
     {
         Date date = new Date(3, 32, 2023);
@@ -227,6 +252,11 @@ public class Date implements Comparable<Date> {
         System.out.println("**Test case #4: # of days in March is 31");
         testResult(date, expectedOutput, actualOutput);
     }
+
+    /**
+     Private tester method to test isValid() method output
+     for invalid date with incorrect number of days for the month.
+     */
     private static void testMonthsWith30Days()
     {
         Date date = new Date(11, 31, 2023);
@@ -236,6 +266,10 @@ public class Date implements Comparable<Date> {
         testResult(date, expectedOutput, actualOutput);
     }
 
+    /**
+     Private tester method to test isValid() method output
+     for invalid date with day = 0.
+     */
     private static void testDay_OutOfRange()
     {
         Date date = new Date(11, 0, 2023);
@@ -244,9 +278,16 @@ public class Date implements Comparable<Date> {
         System.out.println("**Test case #6: # of days must be between 1 and 30 maximum");
         testResult(date, expectedOutput, actualOutput);
     }
+
+    /**
+     Private method to print out formatted test results.
+     @param date date tested
+     @param expectedVal expected return value of isValid() for the date
+     @param actualVal actual return value of isValid() for the date
+     */
     private static void testResult(Date date, boolean expectedVal, boolean actualVal)
     {
-        System.out.println("Test data: " + date.month + "/" + date.day + "/" + date.year +
+        System.out.println("Test data: " + date.toString() +
                 ", expected output: " + expectedVal + ", actual output: " + actualVal + "\n");
     }
 }

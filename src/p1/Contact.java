@@ -1,8 +1,7 @@
-
 /**
  Contact.java defines the Contact object with its attributes: department and email,
  and implements methods to check the validity of the department and email .
- @author Khushi Ranpura, Kusum Gandham
+ @author Khushi Ranpura
  */
 package p1;
 public class Contact
