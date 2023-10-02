@@ -196,7 +196,6 @@ public class EventCalendar
             System.out.println(nonNullEvents[i].toString());
         }
         System.out.println("* end of event calendar *");
-
     }
 
     /**
@@ -248,7 +247,6 @@ public class EventCalendar
                 }
             }
         }
-
         System.out.println("\n* Event calendar by campus and building *");
         // Print the sorted non-null events
         for (int i = 0; i < nonNullCount; i++)
