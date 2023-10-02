@@ -120,12 +120,12 @@ public class EventOrganizer
     public void run()
     {
         System.out.println("Event Organizer running....");
-        //Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         EventCalendar calendar = new EventCalendar(); // Instantiate an EventCalendar
         boolean isRunning = true;
-        while(new Scanner(System.in).hasNextLine() && isRunning)
+        while(scanner.hasNextLine() && isRunning)
         {
-            String line = new Scanner(System.in).nextLine().trim(); // Read the entire line
+            String line = scanner.nextLine().trim(); // Read the entire line
             if(!line.isEmpty())
             {
                 String[] commandAndArgs = line.split(" ", 2); // Split the line into command and arguments
